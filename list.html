@@ -1,0 +1,339 @@
+<html>
+<head>
+<style>
+	* {
+		box-sizing: border-box;
+	}
+	body {
+		margin: 0;
+		backgroung-image: url("https://jackgillilandfmp.files.wordpress.com/2012/05/vintagebackground.jpg");
+		//background-color:#f1f1f1;
+	}
+	.header {
+		//background-color: #f1f1f1;
+		padding: 20px;
+		text-align: center;
+		color: black;
+	}
+	.topnav {
+		overflow: hidden;
+		background-color: #111111;
+	}
+	.column {	
+		float: left;
+		padding: 75px;
+		//padding-left: 150px;
+		//padding-right: 150px;
+		//padding-top: 50px;
+		//padding-bottom: 200px;	
+		color: #0099CC;
+	}
+	.column.side {
+		width: 33%;
+	}	
+	.column.middle {
+		width: 33%;
+		text-align: center;
+	}
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	@media (max-width: 600px) {
+		.column.side, .column.middle {
+			width: 100%;
+		}
+	}
+	.footer {
+ 		background-color: #111111;
+		padding: 10px;
+		text-align: center;
+		color: #f2f2f2;
+	}
+	h3 {
+		//text-align: center;
+	}
+	.pics {
+		margin: auto;
+		width: 58%;
+	}
+	h2 {
+		font-family: Helvetica, sans-serif;
+	}
+	h1 {
+		font-family: Helvetica, sans-serif;
+		font-size: 30px;
+	}
+	button, input, placeholder {
+		/*color: #0099CC; /* Text color */
+
+		color: green;
+
+		background-color: transparent; /* Remove background color */
+	
+		border: 2px solid green; /*#0099CC; /* Border thickness, line style, and color */
+	}
+	#randomBabyName {
+		//border: 3px solid black;
+		font-size: 40px;
+	}
+	#bigButton {
+		color: green;
+
+		background-color: transparent; /* Remove background color */
+	
+		border: 2px solid green;
+		font-size: 24px;
+	}
+	#randomPlace {
+		border-bottom: 1px solid blue;
+		padding-bottom: 20px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js">
+</script>
+	<meta charset="utf-8">
+	<title>Baby Name Generator</title>
+
+</head>
+
+<body ng-app="babyList" ng-controller="babyListCtrl">
+	<div class="header">
+		<h1>Baby Name Generator</h1>
+	</div>
+	<div class="topnav">
+		<p> </p>
+	</div> 
+	
+	<div class="row">
+		<div class="column side" style="color:deeppink;">
+    		<h2>Top 25 Baby Girl Names in 2017</h2>
+
+			<button ng-click="addGirlToList()">Add Checked Names</button><br><br>
+	
+			<div ng-repeat="name in girlNames">
+				<input type="checkbox" ng-model="name.selected">
+				{{name.name}}
+			</div><br>
+			
+			<div>
+				<br>{{errortext}}   		
+			</div>
+		</div>
+
+		<div class="column middle" style="color:black;">
+			
+<div id="randomPlace">
+			<button id="bigButton" ng-click="randomName()">Generate Random Name</button><br><br>
+			{{errortext3}}<br>
+			<h1>Random Baby Name is ...</h1>
+				
+			<div id="randomBabyName">
+				{{randomBabyName}}
+			</div>
+</div>
+			<h1>List of Baby Names</h1>
+			
+			<div>
+				{{startingText}}
+			</div>
+
+			<div ng-repeat="x in namesToAdd track by x.name">
+				{{x.name}} 
+			</div><br>	
+			<button ng-click="clearAll()">Clear List</button><br><br>
+
+    		<h2>Add Additional Baby Names</h2>
+
+    		<form ng-submit="babyNameAdd()">
+      		<input type="text" placeholder='Name' ng-model='inputBabyName'/><br><br>
+      		<button type='submit'>Add Name</button><br><br>
+				{{othererrortext}}
+    		</form>	
+					
+		</div>
+
+		<div class="column side" style="color:blue;">
+    		<h2>Top 25 Baby Boy Names in 2017</h2>
+			
+			<button ng-click="addBoyToList()">Add Checked Names</button><br><br> 
+			
+			<div ng-repeat="name in boyNames">
+				<input type="checkbox" ng-model="name.selected">
+				{{name.name}}
+			</div><br>
+			
+			<div>
+				<br>{{errortext2}}   		
+			</div>
+ 
+		</div>
+
+	</div>
+
+	<div class="footer">
+		<p>Copyright 2017</p>
+	</div>
+
+<script>
+	var app = angular.module('babyList',[]);
+  	app.controller('babyListCtrl', function($scope) {
+  	$scope.babyNameList=[];
+	$scope.namesToAdd = [];
+	$scope.startingText = "List is currently empty! Select names or add your own to get started.";$scope.errortext3 = "";
+	$scope.errortext3 = "";
+
+	$scope.boyNames = [
+		{name:'Liam', selected:false},
+		{name:'Noah', selected:false},		
+		{name:'Lucas', selected:false},		
+		{name:'Logan', selected:false},
+		{name:'Mason', selected:false},
+		{name:'Oliver', selected:false},
+		{name:'Ethan', selected:false},
+		{name:'Elijah', selected:false},
+		{name:'Aiden', selected:false},
+		{name:'James', selected:false},
+		{name:'Benjamin', selected:false},
+		{name:'Sebastain', selected:false},
+		{name:'Alexander', selected:false},
+		{name:'Jackson', selected:false},
+		{name:'Jacob', selected:false},
+		{name:'Carter', selected:false},
+		{name:'Michael', selected:false},
+		{name:'Jayden', selected:false},
+		{name:'Daniel', selected:false},
+		{name:'Matthew', selected:false},
+		{name:'William', selected:false},
+		{name:'Luke', selected:false},
+		{name:'Jack', selected:false},
+		{name:'Grayson', selected:false},
+		{name:'Wyatt', selected:false}
+	];
+
+	$scope.girlNames = [
+		{name:'Emma', selected:false},
+		{name:'Olivia', selected:false},		
+		{name:'Ava', selected:false},		
+		{name:'Isabella', selected:false},
+		{name:'Sophia', selected:false},
+		{name:'Mia', selected:false},
+		{name:'Amelia', selected:false},
+		{name:'Charlotte', selected:false},
+		{name:'Harper', selected:false},
+		{name:'Aria', selected:false},
+		{name:'Ella', selected:false},
+		{name:'Abigail', selected:false},
+		{name:'Evelyn', selected:false},
+		{name:'Emily', selected:false},
+		{name:'Avery', selected:false},
+		{name:'Madison', selected:false},
+		{name:'Scarlett', selected:false},
+		{name:'Chloe', selected:false},
+		{name:'Sofia', selected:false},
+		{name:'Lily', selected:false},
+		{name:'Mila', selected:false},
+		{name:'Layla', selected:false},
+		{name:'Ellie', selected:false},
+		{name:'Riley', selected:false},
+		{name:'Zoey', selected:false}
+	];
+	 
+   $scope.babyNameAdd = function() {
+    	var babyNameObject = {
+      	name:$scope.inputBabyName,
+			selected:false,
+       	//loveLevel:$scope.inputLoveLevel,
+      }
+		$scope.othererrortext = "";
+		var toAdd = true;
+		for(i = 0; i < $scope.namesToAdd.length; i++) {
+			if($scope.namesToAdd[i].name == babyNameObject.name) {
+				toAdd = false;
+			}
+		}
+		if(toAdd) {
+			$scope.namesToAdd.push(babyNameObject);
+		}
+		else {
+			$scope.othererrortext += "The name " + babyNameObject.name + " is already in your list.";
+		}
+      $scope.inputBabyName = "";
+      $scope.startingText = "";
+   }
+
+	$scope.addGirlToList = function() {
+		var girlNames = $scope.girlNames;
+		$scope.errortext = "";
+		angular.forEach(girlNames, function(x) {
+			if(x.selected) {
+				var toAdd = true;
+				for(i = 0; i < $scope.namesToAdd.length; i++) {
+					if($scope.namesToAdd[i].name == x.name) {
+						toAdd = false;
+					}
+				}
+				if(toAdd) {
+					$scope.namesToAdd.push(x);
+				}
+				else {
+					$scope.errortext += "The name " + x.name + " is already in your list.";
+				}
+				x.selected = false;
+			}
+		});
+		$scope.startingText = "";
+	}
+
+	$scope.addBoyToList = function() {
+		var boyNames = $scope.boyNames;
+		$scope.errortext2 = "";
+		angular.forEach(boyNames, function(x) {
+			if(x.selected) {
+				var toAdd = true;
+				for(i = 0; i < $scope.namesToAdd.length; i++) {
+					if($scope.namesToAdd[i].name == x.name) {
+						toAdd = false;
+					}
+				}
+				if(toAdd) {
+					$scope.namesToAdd.push(x);
+				}
+				else {
+					$scope.errortext2 += "The name " + x.name + " is already in your list.";
+				}
+				x.selected = false;
+			}
+		});
+		$scope.startingText = "";
+	}
+	
+	$scope.clearAll = function() {
+		$scope.namesToAdd = [];
+		$scope.startingText = "List is currently empty! Select names or add your own to get started.";
+	}
+
+	$scope.randomName = function() {
+		if($scope.namesToAdd.length == 0) {
+			$scope.errortext3 = "Your list is currently empty. Please add names to the list before generating a random name.";
+			console.log("error");
+		}
+		else {
+			var randomNumber = Math.random() * $scope.namesToAdd.length;
+			randomNumber = Math.floor(randomNumber);
+			$scope.randomBabyName = $scope.namesToAdd[randomNumber].name;
+			$scope.errortext3 = "";
+		}
+	}
+
+  	});
+</script>
+
+</body>
+</html>
+
+
+
+
+
