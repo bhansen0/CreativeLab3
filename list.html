@@ -6,11 +6,8 @@
 	}
 	body {
 		margin: 0;
-		backgroung-image: url("https://jackgillilandfmp.files.wordpress.com/2012/05/vintagebackground.jpg");
-		//background-color:#f1f1f1;
 	}
 	.header {
-		//background-color: #f1f1f1;
 		padding: 20px;
 		text-align: center;
 		color: black;
@@ -21,11 +18,7 @@
 	}
 	.column {	
 		float: left;
-		padding: 75px;
-		//padding-left: 150px;
-		//padding-right: 150px;
-		//padding-top: 50px;
-		//padding-bottom: 200px;	
+		padding: 75px;	
 		color: #0099CC;
 	}
 	.column.side {
@@ -51,9 +44,6 @@
 		text-align: center;
 		color: #f2f2f2;
 	}
-	h3 {
-		//text-align: center;
-	}
 	.pics {
 		margin: auto;
 		width: 58%;
@@ -66,7 +56,6 @@
 		font-size: 30px;
 	}
 	button, input, placeholder {
-		/*color: #0099CC; /* Text color */
 
 		color: green;
 
@@ -75,7 +64,6 @@
 		border: 2px solid green; /*#0099CC; /* Border thickness, line style, and color */
 	}
 	#randomBabyName {
-		//border: 3px solid black;
 		font-size: 40px;
 	}
 	#bigButton {
@@ -124,7 +112,7 @@
 
 		<div class="column middle" style="color:black;">
 			
-<div id="randomPlace">
+		<div id="randomPlace">
 			<button id="bigButton" ng-click="randomName()">Generate Random Name</button><br><br>
 			{{errortext3}}<br>
 			<h1>Random Baby Name is ...</h1>
@@ -132,7 +120,8 @@
 			<div id="randomBabyName">
 				{{randomBabyName}}
 			</div>
-</div>
+		</div>
+
 			<h1>List of Baby Names</h1>
 			
 			<div>
@@ -181,7 +170,7 @@
   	app.controller('babyListCtrl', function($scope) {
   	$scope.babyNameList=[];
 	$scope.namesToAdd = [];
-	$scope.startingText = "List is currently empty! Select names or add your own to get started.";$scope.errortext3 = "";
+	$scope.startingText = "List is currently empty! Select names or add your own to get started.";
 	$scope.errortext3 = "";
 
 	$scope.boyNames = [
@@ -244,7 +233,6 @@
     	var babyNameObject = {
       	name:$scope.inputBabyName,
 			selected:false,
-       	//loveLevel:$scope.inputLoveLevel,
       }
 		$scope.othererrortext = "";
 		var toAdd = true;
